@@ -342,6 +342,7 @@ io.on("connection", (socket) => {
     const room = ctx.room; if (!room || !isHost() || !room.engine) return;
     const eng = room.engine; const now = Date.now();
     if (["agenda", "respond", "recap"].includes(eng.phase)) eng.deadline = now - 1;
+    else if (eng.phase === "review" && eng.review) eng.review.deadline = now - 1;
     else if (eng.phase === "group" && eng.group) eng.group.deadline = now - 1;
     else if (eng.phase === "event") eng.players.forEach((p) => { if (p.alive && p.scene) p.scene.deadline = now - 1; });
     stepRoom(room);
@@ -387,6 +388,12 @@ io.on("connection", (socket) => {
   socket.on("game:groupReady", safe(() => {
     if (!inGame()) return;
     social.groupReady(ctx.room.engine, seatOf());
+    after();
+  }));
+  socket.on("game:rate", safe(({ score }) => {
+    if (!inGame()) return;
+    const r = ctx.room.engine.rate(seatOf(), score);
+    if (!r.ok && r.error) toast(r.error);
     after();
   }));
   socket.on("game:recapReady", safe(() => {

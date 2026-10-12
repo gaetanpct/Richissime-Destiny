@@ -28,8 +28,16 @@ La route /health répond quand le serveur est vivant.
 
 ## Contenu
 
-Plus de 560 scènes, 71 métiers, des maladies rares, des stars inventées et les prénoms de la bande d'amis. Le réglage Prénoms de la bande se trouve dans le salon.
+Plus de 710 scènes, 71 métiers, des maladies rares, des stars inventées et les prénoms de la bande d'amis. Le réglage Prénoms de la bande se trouve dans le salon.
+
+La version 3 ajoute 152 scènes d'humour noir (fichiers lib/content/100 à 103), avec des chaînes de conséquences différées, par exemple une vidéo d'ado qui ressurgit, une relation d'un soir qui mène à un enfant, un investissement absurde suivi d'huissier puis de surendettement, un succès qui attire les profiteurs. Cinq scènes collectives pour quatre joueurs s'y ajoutent (célébrité, secret, héritage, rival amoureux, scandale).
 
 ## Réglages utiles
 
 Tous les réglages de partie se font dans le salon, par l'hôte, avec une explication sous chaque option. Pour les tests, la variable d'environnement RICHISSIME_TIME_SCALE accélère les chronos.
+
+## Nouveautés de la version 4
+
+Un bouton Destins aléatoires dans le salon tire au sort, pour chaque joueur, la famille de naissance, la dangerosité de la vie, le niveau de loufoquerie et le don de naissance. Chaque critère a aussi sa propre option Au hasard par joueur.
+
+La fin de partie se fait par vote par défaut. Quand tout le monde est mort, chaque vie défile une par une avec sa fiche (moments clés, fortune au sommet et au plus bas, argent gagné et dépensé, parcours, états finaux). Les joueurs notent chaque vie de 1 à 10 dans un temps réglable, et la meilleure moyenne gagne. Les réglages permettent de revenir à la fin à la fortune, de changer le temps de vote et d'autoriser ou non à se noter soi-même.

@@ -300,3 +300,33 @@ svg.chart text { font-family: var(--body); font-size: 11px; fill: #3b3b48; }
   .code { font-size: 2.4rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ---------- fin par vote ---------- */
+.rvcard { margin: 14px 0; }
+.rvhead { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+.rvhead .grow { flex: 1; min-width: 200px; }
+.rvtitle { font-style: italic; margin: 4px 0; }
+.rvtiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 10px 0; }
+.rvtile { border: 2px solid var(--ink); border-radius: 10px; padding: 8px 10px; background: #fff; }
+.rvtile .k { font-size: .74rem; color: var(--muted); font-weight: 700; line-height: 1.15; }
+.rvtile .v { font-family: var(--head); font-size: 1.25rem; }
+.rvtile .s { font-size: .74rem; color: var(--muted); }
+.rvtile.good .v { color: var(--good); } .rvtile.bad .v { color: var(--bad); }
+.rvcols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.rvlist { list-style: none; padding: 0; margin: 0; font-size: .92rem; } .rvlist li { margin: 4px 0; }
+.rvmoments { display: grid; gap: 4px; }
+.rvmoments .mo { display: grid; grid-template-columns: 60px 1fr; gap: 8px; font-size: .92rem; padding: 4px 0; border-bottom: 1px dashed rgba(20,33,61,.2); }
+.rvprog { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
+.rvstep { display: flex; align-items: center; gap: 4px; padding: 3px 8px; border: 2px solid var(--ink); border-radius: 99px; background: #fff; opacity: .6; font-weight: 700; font-size: .82rem; }
+.rvstep.cur { opacity: 1; background: var(--gold-2); box-shadow: var(--shadow-sm); } .rvstep.done { opacity: 1; background: #bfe8cf; }
+.rvvote { text-align: center; }
+.rvscale { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
+.rvscale button { width: 44px; height: 44px; border: 2px solid var(--ink); border-radius: 10px; background: #fff; font-weight: 800; font-size: 1.1rem; box-shadow: var(--shadow-sm); }
+.rvscale button.sel { background: var(--navy); color: #fdf6e3; transform: translateY(-2px); }
+.rvscale button:disabled { opacity: .4; cursor: not-allowed; }
+.rvwho { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.rvgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.rvres { border: 2px solid var(--ink); border-radius: 10px; padding: 8px 10px; background: #fff; }
+.rvres-h { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 6px; }
+.rvscores { display: flex; gap: 5px; flex-wrap: wrap; }
+@media (max-width: 560px) { .rvscale button { width: 36px; height: 40px; } }

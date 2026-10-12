@@ -70,6 +70,7 @@
     let key, fn;
     if (!S.room) { key = "home"; fn = RD.renderHome; }
     else if (S.room.status === "lobby") { key = "lobby"; fn = RD.renderLobby; }
+    else if (S.game && S.game.phase === "review" && S.game.review) { key = "review" + S.game.review.idx; fn = RD.renderReview; }
     else if (S.game && S.game.phase === "over") { key = "end"; fn = RD.renderEnd; }
     else if (S.game) { key = "game"; fn = RD.renderGame; }
     else { key = "wait"; fn = (r) => { clear(r); r.appendChild(h("div.wrap.center", h("h2", "La partie démarre…"))); }; }

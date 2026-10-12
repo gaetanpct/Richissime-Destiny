@@ -43,7 +43,7 @@
           h("div.coins", "💰 🎩 💎"),
           h("div.ribbon", "1 à 6 joueurs en ligne, ou tout seul"),
           h("h1", "Richissime ", h("span", "Destiny")),
-          h("p.tag", "Vis une vie entière, une année à la fois, du CP jusqu'à la tombe. Les choix, les rencontres, les catastrophes, les coups de chance. À la fin, une seule question compte, qui a fini le plus riche ?")),
+          h("p.tag", "Vis une vie entière, une année à la fois, du CP jusqu'à la tombe. Les choix, les rencontres, les catastrophes, les coups de chance. À la fin, tout le monde note la vie de chacun, et la meilleure moyenne gagne.")),
         h("div.home-grid",
           h("div.card",
             h("h3", "Créer une partie"),
@@ -56,11 +56,11 @@
             h("label.field", "Code du salon"), codeIn,
             h("div", { style: { marginTop: "14px" } }, h("button.btn.navy.big", { on: { click: () => go("room:join") } }, "Rejoindre")))),
         h("div.howto",
-          [["1", "Même départ pour tous", "Tout le monde entre dans la même classe à 6, 7 ou 8 ans, avec un petit don de naissance."],
+          [["1", "Une classe, des destins", "Tout le monde entre dans la même classe à 6, 7 ou 8 ans. Famille et don de naissance peuvent être tirés au sort."],
            ["2", "Une année par tour", "Chaque année, tu choisis un projet de vie, tu gères ton argent, puis tu vis tes événements."],
            ["3", "Des choix qui comptent", "Études, métier, amour, famille, magouilles. Chaque décision laisse des traces."],
            ["4", "Entre joueurs", "Prêts, mariages, sociétés, coups bas, enchères, braquages. Qui coopère, qui trahit ?"],
-           ["5", "Tous mortels", "On meurt chacun son tour. Les héritages comptent. Celui qui finit le plus riche gagne."]]
+           ["5", "Tous mortels, puis le vote", "On meurt chacun son tour. Ensuite chaque vie défile et les joueurs la notent. La meilleure moyenne gagne."]]
             .map(([n, t, d]) => h("div.card.flat", h("div.n", n), h("h4", t), h("p.small", d)))),
         h("div.footer", S().meta ? S().meta.scenes + " scènes de vie, des centaines de rebondissements, aucune partie identique." : ""))));
   };
@@ -71,6 +71,14 @@
   function settingsPanel(room, isHost) {
     const cur = room.settings;
     const box = h("div");
+    if (isHost) {
+      box.appendChild(h("div.card.flat.gold", { style: { marginBottom: "12px" } },
+        h("b", "🎲 Destins aléatoires"),
+        h("p.small", "Un seul bouton pour tirer au sort la famille de naissance, la dangerosité de la vie, le niveau de loufoquerie et le don de naissance de chaque joueur. Ce n'est volontairement pas équitable."),
+        h("div.row", { style: { gap: "8px", flexWrap: "wrap" } },
+          h("button.btn.small", { type: "button", on: { click: () => { RD.play("select"); RD.emit("room:settings", { settings: { startClass: "chaos", danger: "chaos", loufoque: "chaos", giftMode: "chaos" } }); } } }, "🎲 Tout tirer au hasard"),
+          h("button.btn.small.light", { type: "button", on: { click: () => { RD.play("click"); RD.emit("room:settings", { settings: { startClass: "moyenne", danger: "normal", loufoque: "2", giftMode: "choix" } }); } } }, "⚖️ Même départ pour tous"))));
+    }
     S().meta.schema.forEach((cat) => {
       const c = h("div.setcat", h("h4", cat.category));
       cat.items.forEach((it) => {
@@ -108,7 +116,8 @@
       h("label.field", "Couleur"),
       h("div.swatches", meta.colors.map((c) => h("button" + (av.color === c ? ".sel" : ""), { type: "button", "aria-label": "couleur", style: { background: c }, on: { click: () => RD.emit("room:char", { avatar: { acc: av.acc, color: c } }) } }))),
       h("label.field", "Ton don de naissance"),
-      h("div.giftgrid", meta.gifts.map((g) => h("button.gift" + (me.gift === g.id ? ".sel" : ""), { type: "button", on: { click: () => { RD.play("select"); RD.emit("room:char", { gift: g.id }); } } }, h("b", g.ic + " " + g.l), h("span", g.d)))));
+      S().room && S().room.settings.giftMode === "chaos" ? h("p.small.muted", "🎲 L'hôte a choisi de tirer les dons au sort. Le tien sera une surprise à la naissance.") : null,
+      h("div.giftgrid", { style: S().room && S().room.settings.giftMode === "chaos" ? { opacity: ".4", pointerEvents: "none" } : {} }, meta.gifts.map((g) => h("button.gift" + (me.gift === g.id ? ".sel" : ""), { type: "button", on: { click: () => { RD.play("select"); RD.emit("room:char", { gift: g.id }); } } }, h("b", g.ic + " " + g.l), h("span", g.d)))));
   }
 
   RD.renderLobby = function (root) {
