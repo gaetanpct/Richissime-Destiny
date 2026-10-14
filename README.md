@@ -1,6 +1,8 @@
-# Richissime Destiny
+# Picuite Games
 
-Un jeu de vie en ligne pour 1 à 6 joueurs, ou en solo. Chaque joueur vit un personnage fictif de l'enfance jusqu'à la mort, une année par tour. À la fin, celui qui a la plus grosse fortune gagne.
+Le site qui réunit tous les jeux, avec une page d'accueil pour choisir.
+
+Jeux inclus pour l'instant, Gaeboub-up (plateau à la Monopoly), Goliathicus (stratégie et bluff) et Richissime Destiny (simulation de vie entre amis).
 
 ## Lancer en local
 
@@ -13,31 +15,28 @@ Puis ouvrir localhost, port 3000, dans le navigateur.
 
 1. Pousser ce dossier sur un dépôt GitHub.
 2. Sur Render, créer un Web Service relié au dépôt.
-3. Build Command, `npm install`.
-4. Start Command, `npm start`.
-5. Render fournit la variable PORT toute seule, rien d'autre à régler.
+3. Build Command, npm install.
+4. Start Command, npm start.
+5. Render fournit la variable PORT tout seul.
 
-La route /health répond quand le serveur est vivant.
+Une seule adresse sert tout le site. Les jeux sont sur /gaeboub-up, /goliathicus et /richissime. La route /health répond quand le serveur est vivant.
 
 ## Organisation
 
-- server.js, le serveur Express et Socket.io (salons, connexions, tchat).
-- lib/, le moteur et tout le contenu des scènes. Ces fichiers ne sont jamais envoyés au navigateur, ce qui évite les spoilers.
-- lib/view.js, construit pour chaque joueur uniquement ce qu'il a le droit de voir.
-- public/, l'interface (HTML, CSS, JavaScript simple).
+- server.js, le serveur du site, il découvre et monte automatiquement chaque jeu.
+- public/, la page d'accueil (index.html, style.css, app.js), les logos dans public/logos et le petit bouton de retour pg-back.js.
+- games/, un dossier par jeu. Chaque dossier contient son server.js, son dossier public, ses éventuels dossiers lib, et un fichier game.json qui sert à la présentation sur l'accueil.
 
-## Contenu
+## Une seule base de code
 
-Plus de 710 scènes, 71 métiers, des maladies rares, des stars inventées et les prénoms de la bande d'amis. Le réglage Prénoms de la bande se trouve dans le salon.
+Ce dépôt est la seule source de vérité. Une modification faite dans games/gaeboub-up, games/goliathicus ou games/richissime s'applique directement au site Picuite Games, il n'y a pas de deuxième script à tenir à jour. Les anciens dépôts séparés de chaque jeu ne servent plus.
 
-La version 3 ajoute 152 scènes d'humour noir (fichiers lib/content/100 à 103), avec des chaînes de conséquences différées, par exemple une vidéo d'ado qui ressurgit, une relation d'un soir qui mène à un enfant, un investissement absurde suivi d'huissier puis de surendettement, un succès qui attire les profiteurs. Cinq scènes collectives pour quatre joueurs s'y ajoutent (célébrité, secret, héritage, rival amoureux, scandale).
+## Ajouter un nouveau jeu plus tard
 
-## Réglages utiles
+1. Créer un dossier dans games/ au nom du jeu, par exemple games/mon-jeu.
+2. Y mettre un server.js qui exporte une fonction mount(server, prefix) renvoyant un routeur Express. Le serveur Socket.io du jeu doit utiliser le chemin prefix + "/socket.io", et le client doit se connecter avec ce même chemin.
+3. Ajouter un game.json (nom, accroche, présentation, étapes, couleurs, ordre) en copiant celui d'un autre jeu.
+4. Déposer son logo en SVG dans public/logos/ sous le nom de son dossier, par exemple mon-jeu.svg.
+5. Ajouter dans la page index.html du jeu le script /pg-back.js pour avoir le bouton de retour vers l'accueil.
 
-Tous les réglages de partie se font dans le salon, par l'hôte, avec une explication sous chaque option. Pour les tests, la variable d'environnement RICHISSIME_TIME_SCALE accélère les chronos.
-
-## Nouveautés de la version 4
-
-Un bouton Destins aléatoires dans le salon tire au sort, pour chaque joueur, la famille de naissance, la dangerosité de la vie, le niveau de loufoquerie et le don de naissance. Chaque critère a aussi sa propre option Au hasard par joueur.
-
-La fin de partie se fait par vote par défaut. Quand tout le monde est mort, chaque vie défile une par une avec sa fiche (moments clés, fortune au sommet et au plus bas, argent gagné et dépensé, parcours, états finaux). Les joueurs notent chaque vie de 1 à 10 dans un temps réglable, et la meilleure moyenne gagne. Les réglages permettent de revenir à la fin à la fortune, de changer le temps de vote et d'autoriser ou non à se noter soi-même.
+La carte du jeu apparaît toute seule sur l'accueil, à la place réservée.

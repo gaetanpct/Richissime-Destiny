@@ -1,7 +1,7 @@
 {
-  "name": "richissime-destiny",
+  "name": "picuite-games",
   "version": "1.0.0",
-  "description": "Richissime Destiny - jeu de vie en ligne pour 1 à 6 joueurs, finis le plus riche possible",
+  "description": "Picuite Games - le site qui réunit Gaeboub-up, Goliathicus et Richissime Destiny",
   "main": "server.js",
   "scripts": { "start": "node server.js" },
   "engines": { "node": ">=18" },
