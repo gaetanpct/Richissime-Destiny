@@ -1,27 +1,79 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Richissime Destiny</title>
-<meta name="description" content="Vis une vie entière, année après année, et finis aussi riche que possible. De 1 à 6 joueurs.">
-<meta name="theme-color" content="#14213d">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%B0%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffd23f">
+  <title>Picuite Games</title>
+  <meta name="description" content="Des jeux à lancer entre amis, directement dans le navigateur. Plateau, stratégie, vie absurde. Crée un salon, envoie le code, jouez.">
+  <link rel="icon" type="image/svg+xml" href="logos/picuite.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="toasts" aria-live="polite"></div>
-<div id="app"></div>
-<div id="modal" class="hidden"></div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/util.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/lobby.js"></script>
-<script src="js/review.js"></script>
-<script src="js/game.js"></script>
-<script src="js/app.js"></script>
+  <div class="confetti" aria-hidden="true">
+    <i style="--x:6%;--y:14%;--r:18deg;--c:#ff5a5f"></i><i style="--x:92%;--y:10%;--r:-24deg;--c:#3ddc97"></i>
+    <i style="--x:15%;--y:62%;--r:40deg;--c:#7c5cff"></i><i style="--x:88%;--y:48%;--r:12deg;--c:#ff5a5f"></i>
+    <i style="--x:50%;--y:6%;--r:-8deg;--c:#7c5cff"></i><i style="--x:70%;--y:78%;--r:30deg;--c:#3ddc97"></i>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="/" aria-label="Picuite Games, accueil">
+      <img src="logos/picuite.svg" alt="" width="46" height="46">
+      <span class="wm">Picuite<small>GAMES</small></span>
+    </a>
+    <nav>
+      <a href="#jeux">Les jeux</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#choisir">Lequel choisir</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="kicker">Des jeux en ligne pour les soirées entre amis</p>
+        <h1>Une partie, un code, <span>et c'est parti.</span></h1>
+        <p class="lead">Aucun compte à créer, rien à installer. Tu choisis un jeu, tu crées un salon, tu envoies le code à quatre lettres à tes amis, et vous jouez ensemble depuis votre navigateur. Il manque du monde ? Des robots complètent la table.</p>
+        <div class="cta-row">
+          <a class="btn" href="#jeux">Choisir un jeu</a>
+          <a class="btn ghost" href="#comment">Voir comment ça marche</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img class="h1" src="logos/gaeboub-up.svg" alt="">
+        <img class="h2" src="logos/goliathicus.svg" alt="">
+        <img class="h3" src="logos/richissime.svg" alt="">
+      </div>
+    </section>
+
+    <section id="comment" class="how">
+      <h2>Jouer en trois étapes</h2>
+      <ol class="steps3">
+        <li><span class="n">1</span><b>Tu choisis un jeu</b><p>Plateau, stratégie ou vie complète. Chaque jeu a son ambiance et ses règles, expliquées juste en dessous.</p></li>
+        <li><span class="n">2</span><b>Tu crées un salon</b><p>Tu donnes ton pseudo, tu règles la partie comme tu veux, et tu reçois un code à quatre lettres.</p></li>
+        <li><span class="n">3</span><b>Tes amis te rejoignent</b><p>Ils tapent le code ou ouvrent ton lien d'invitation. Quand tout le monde est prêt, tu lances.</p></li>
+      </ol>
+    </section>
+
+    <section id="jeux" class="games">
+      <h2>Les jeux</h2>
+      <p class="sub">Trois jeux pour l'instant, et d'autres arrivent.</p>
+      <div id="grid" class="grid"><p class="muted">Chargement des jeux…</p></div>
+    </section>
+
+    <section id="choisir" class="pick">
+      <h2>Quel jeu pour quelle soirée</h2>
+      <div id="pick" class="pickgrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="logos/picuite.svg" alt="" width="34" height="34">
+    <span><b>Picuite Games</b> · des jeux faits maison pour jouer ensemble</span>
+  </footer>
+  <script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1d1230">
+  <title>Goliathicus</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%B2%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toasts" aria-live="polite"></div>
+
+  <!-- ===================== ACCUEIL ===================== -->
+  <section id="screen-home" class="screen screen--active">
+    <div class="sky">
+      <div class="stars"></div>
+      <div class="sun"></div>
+      <div class="cloud cloud--1"></div><div class="cloud cloud--2"></div><div class="cloud cloud--3"></div>
+      <div class="floaters">
+        <span style="--x:8%;--d:0s;--s:2.6rem">🐲</span><span style="--x:22%;--d:2s;--s:2rem">🥚</span>
+        <span style="--x:78%;--d:1s;--s:2.4rem">👑</span><span style="--x:91%;--d:3.2s;--s:1.9rem">🐀</span>
+        <span style="--x:64%;--d:4s;--s:1.8rem">🧙</span><span style="--x:36%;--d:5s;--s:1.7rem">🥧</span>
+      </div>
+      <svg class="castle" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><linearGradient id="hillG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c4a2b"/><stop offset="1" stop-color="#16301a"/></linearGradient></defs>
+        <path d="M0 160 Q150 110 300 150 T600 150 T900 150 T1200 130 V220 H0Z" fill="url(#hillG)"/>
+        <g fill="#2a1840">
+          <rect x="60" y="70" width="170" height="100"/><rect x="45" y="55" width="34" height="115"/><rect x="211" y="55" width="34" height="115"/>
+          <rect x="105" y="25" width="80" height="145"/>
+          <polygon points="45,55 62,18 79,55"/><polygon points="211,55 228,18 245,55"/><polygon points="105,25 145,-18 185,25"/>
+          <rect x="135" y="120" width="20" height="50" fill="#f5c04a"/>
+          <rect x="90" y="95" width="10" height="16" fill="#f5c04a"/><rect x="190" y="95" width="10" height="16" fill="#f5c04a"/><rect x="140" y="52" width="10" height="16" fill="#f5c04a"/>
+        </g>
+        <g fill="#241437"><rect x="980" y="105" width="64" height="75"/><polygon points="970,105 1012,60 1054,105"/><rect x="1090" y="125" width="44" height="55"/><polygon points="1082,125 1112,92 1142,125"/><rect x="940" y="132" width="30" height="40"/></g>
+      </svg>
+    </div>
+
+    <div class="home-wrap">
+      <header class="logo">
+        <div class="logo__crown">👑</div>
+        <h1 class="logo__big">Goliathicus</h1>
+        <div class="logo__ribbon"><span>Le jeu des royaumes</span></div>
+        <p class="logo__tag">Bluffe. Avance. Croque l'Œuf !</p>
+      </header>
+
+      <main class="home-card card">
+        <label class="field">
+          <span class="field__label">Ton nom de guerrier</span>
+          <input id="input-name" type="text" maxlength="16" placeholder="Ex. Sire Pupuce" autocomplete="off">
+        </label>
+        <div class="home-actions">
+          <button id="btn-create" class="btn btn--gold btn--big">🏰 Créer un royaume</button>
+          <button id="btn-solo" class="btn btn--green btn--big">🤖 Partie rapide contre l'IA</button>
+        </div>
+        <div class="home-or"><span>ou rejoindre des amis</span></div>
+        <div class="join-row">
+          <input id="input-code" type="text" maxlength="4" placeholder="CODE" autocomplete="off" class="code-input">
+          <button id="btn-join" class="btn btn--plum">Rejoindre</button>
+        </div>
+        <button id="btn-rules" class="link-btn">📜 Comment jouer ?</button>
+      </main>
+      <footer class="home-foot">2 à 4 joueurs en ligne · parties de 10 à 40 minutes</footer>
+    </div>
+  </section>
+
+  <!-- ===================== SALON ===================== -->
+  <section id="screen-lobby" class="screen">
+    <div class="lobby-bg"></div>
+    <div class="lobby">
+      <header class="lobby__head">
+        <button id="btn-lobby-leave" class="btn btn--ghost btn--small">⬅ Quitter</button>
+        <div class="lobby__title">
+          <span class="lobby__label">Code du royaume</span>
+          <button id="btn-copy-code" class="code-badge" title="Copier le code"><span id="lobby-code">----</span> <small>📋</small></button>
+        </div>
+        <button id="btn-lobby-rules" class="btn btn--ghost btn--small">📜 Règles</button>
+      </header>
+
+      <div class="lobby__grid">
+        <aside class="lobby__players card">
+          <h2 class="h-section">Les prétendants</h2>
+          <div id="seat-list" class="seat-list"></div>
+          <div id="host-ai-tools" class="ai-tools">
+            <button id="btn-add-ai" class="btn btn--green btn--small">🤖 Ajouter une IA</button>
+          </div>
+          <div class="board-preview">
+            <h3 class="h-sub">Aperçu du plateau</h3>
+            <div id="board-preview" class="board-preview__grid"></div>
+            <p id="board-preview-note" class="muted small"></p>
+          </div>
+        </aside>
+        <section class="lobby__settings card">
+          <h2 class="h-section">Les règles du royaume <span id="settings-lock" class="pill pill--lock hidden">Seul l'hôte peut modifier</span></h2>
+          <div id="settings-form"></div>
+        </section>
+      </div>
+
+      <footer class="lobby__foot">
+        <div id="lobby-hint" class="muted"></div>
+        <div class="lobby__foot-btns">
+          <button id="btn-ready" class="btn btn--plum btn--big hidden">✋ Je suis prêt</button>
+          <button id="btn-start" class="btn btn--gold btn--big hidden">⚔️ Lancer la bataille</button>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ===================== PARTIE ===================== -->
+  <section id="screen-game" class="screen">
+    <div class="game">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button id="btn-menu" class="icon-btn" title="Menu">☰</button>
+          <div class="topbar__title">Goliathicus</div>
+        </div>
+        <div id="turn-banner" class="turn-banner">…</div>
+        <div class="topbar__right">
+          <div id="timer" class="timer hidden"><span id="timer-text">0</span></div>
+          <div class="round-chip">Tour <b id="round-num">1</b></div>
+          <button id="btn-sound" class="icon-btn" title="Son">🔊</button>
+          <button id="btn-chat-toggle" class="icon-btn" title="Tchat">💬<span id="chat-badge" class="badge hidden">0</span></button>
+        </div>
+      </header>
+
+      <div class="game__main">
+        <div class="board-zone" id="board-zone">
+          <div id="board-wrap" class="board-wrap">
+            <div id="board" class="board"></div>
+            <div id="board-fx" class="board-fx"></div>
+          </div>
+          <div id="duel-banner" class="duel-banner hidden"></div>
+          <div id="chaos-banner" class="chaos-banner hidden"></div>
+          <div id="board-hint" class="board-hint"></div>
+        </div>
+
+        <aside class="side">
+          <div id="player-cards" class="player-cards"></div>
+          <div id="action-panel" class="action-panel card"></div>
+          <div id="piece-info" class="piece-info card hidden"></div>
+          <div class="card ladder-card">
+            <h3 class="h-sub">📊 Échelle des forces</h3>
+            <div id="ladder-mini" class="ladder"></div>
+          </div>
+          <div class="graveyard card">
+            <h3 class="h-sub">⚰️ Cimetière</h3>
+            <div id="graveyard" class="graveyard__list"></div>
+          </div>
+          <div id="log-card" class="log card hidden">
+            <h3 class="h-sub">📜 Chronique</h3>
+            <ol id="log-list" class="log__list"></ol>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div id="menu-pop" class="menu-pop hidden">
+      <button id="btn-menu-rules" class="menu-pop__item">📜 Règles</button>
+      <button id="btn-menu-resign" class="menu-pop__item menu-pop__item--danger">🏳️ Abandonner</button>
+      <button id="btn-menu-quit" class="menu-pop__item">🚪 Quitter le royaume</button>
+    </div>
+  </section>
+
+  <!-- ===================== FIN DE PARTIE ===================== -->
+  <div id="end-overlay" class="overlay hidden">
+    <div class="end card">
+      <div class="end__confetti" id="end-confetti"></div>
+      <div id="end-trophy" class="end__trophy">🏆</div>
+      <h2 id="end-title" class="end__title">Victoire !</h2>
+      <p id="end-sub" class="end__sub"></p>
+      <div id="end-awards" class="awards"></div>
+      <div id="end-table" class="end__table"></div>
+      <div class="end__btns">
+        <button id="btn-end-view" class="btn btn--ghost">👀 Revoir le plateau</button>
+        <button id="btn-end-lobby" class="btn btn--gold hidden">🔁 Retour au salon</button>
+        <button id="btn-end-quit" class="btn btn--plum">🚪 Quitter</button>
+      </div>
+      <p id="end-wait" class="muted small hidden">En attente de l'hôte pour rejouer…</p>
+    </div>
+  </div>
+
+  <!-- ===================== COMPOSITION SUR MESURE ===================== -->
+  <div id="compose-overlay" class="overlay hidden">
+    <div class="compose card">
+      <h2 class="compose__title">🛠️ Compose ton armée</h2>
+      <p id="compose-sub" class="muted small"></p>
+      <div id="compose-meters" class="army-editor__meters"></div>
+      <div id="compose-presets" class="btn-row"></div>
+      <div id="compose-grid" class="army-editor__grid"></div>
+      <div id="compose-status" class="compose__status"></div>
+      <div class="compose__btns">
+        <button id="btn-compose-ready" class="btn btn--gold btn--big">✅ Valider mon armée</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== RÈGLES ===================== -->
+  <div id="rules-overlay" class="overlay hidden">
+    <div class="rules card">
+      <button id="btn-rules-close" class="icon-btn rules__close" aria-label="Fermer">✕</button>
+      <h2 class="rules__title">📜 Comment jouer à Goliathicus</h2>
+      <div id="rules-body" class="rules__body"></div>
+    </div>
+  </div>
+
+  <!-- ===================== CHAT ===================== -->
+  <aside id="chat-panel" class="chat hidden">
+    <header class="chat__head"><b>💬 Tchat du royaume</b><button id="btn-chat-close" class="icon-btn">✕</button></header>
+    <div id="chat-messages" class="chat__messages"></div>
+    <form id="chat-form" class="chat__form" autocomplete="off">
+      <input id="chat-input" type="text" maxlength="200" placeholder="Écris un message…">
+      <button class="btn btn--gold btn--small" type="submit">Envoyer</button>
+    </form>
+  </aside>
+
+  <button id="btn-chat-fab" class="chat-fab hidden" title="Tchat">💬<span id="chat-fab-badge" class="badge hidden">0</span></button>
+
+  <div id="confirm-overlay" class="overlay hidden">
+    <div class="confirm card">
+      <p id="confirm-text"></p>
+      <div class="confirm__btns">
+        <button id="btn-confirm-no" class="btn btn--ghost">Non, annuler</button>
+        <button id="btn-confirm-yes" class="btn btn--gold">Oui</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="socket.io/socket.io.js"></script>
+  <script src="game/pieces.js"></script>
+  <script src="game/rules-schema.js"></script>
+  <script src="game/boards.js"></script>
+  <script src="game/ai.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/rules-modal.js"></script>
+  <script src="js/lobby.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+<script src="/pg-back.js" defer></script>
+</body>
+</html>

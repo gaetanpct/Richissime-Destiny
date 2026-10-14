@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Picuite Games">
+<g transform="rotate(-8 50 50)">
+<rect x="10" y="10" width="80" height="80" rx="22" fill="#ff5a5f" stroke="#1a1a2e" stroke-width="6"/>
+<circle cx="34" cy="40" r="9" fill="#fff" stroke="#1a1a2e" stroke-width="4"/><circle cx="66" cy="40" r="9" fill="#fff" stroke="#1a1a2e" stroke-width="4"/>
+<circle cx="36" cy="42" r="3.5" fill="#1a1a2e"/><circle cx="64" cy="42" r="3.5" fill="#1a1a2e"/>
+<path d="M30 62 Q50 82 70 62" fill="none" stroke="#1a1a2e" stroke-width="6" stroke-linecap="round"/>
+</g></svg>
