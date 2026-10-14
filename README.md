@@ -1,0 +1,43 @@
+# Richissime Destiny
+
+Un jeu de vie en ligne pour 1 à 6 joueurs, ou en solo. Chaque joueur vit un personnage fictif de l'enfance jusqu'à la mort, une année par tour. À la fin, celui qui a la plus grosse fortune gagne.
+
+## Lancer en local
+
+    npm install
+    npm start
+
+Puis ouvrir localhost, port 3000, dans le navigateur.
+
+## Déployer sur Render
+
+1. Pousser ce dossier sur un dépôt GitHub.
+2. Sur Render, créer un Web Service relié au dépôt.
+3. Build Command, `npm install`.
+4. Start Command, `npm start`.
+5. Render fournit la variable PORT toute seule, rien d'autre à régler.
+
+La route /health répond quand le serveur est vivant.
+
+## Organisation
+
+- server.js, le serveur Express et Socket.io (salons, connexions, tchat).
+- lib/, le moteur et tout le contenu des scènes. Ces fichiers ne sont jamais envoyés au navigateur, ce qui évite les spoilers.
+- lib/view.js, construit pour chaque joueur uniquement ce qu'il a le droit de voir.
+- public/, l'interface (HTML, CSS, JavaScript simple).
+
+## Contenu
+
+Plus de 710 scènes, 71 métiers, des maladies rares, des stars inventées et les prénoms de la bande d'amis. Le réglage Prénoms de la bande se trouve dans le salon.
+
+La version 3 ajoute 152 scènes d'humour noir (fichiers lib/content/100 à 103), avec des chaînes de conséquences différées, par exemple une vidéo d'ado qui ressurgit, une relation d'un soir qui mène à un enfant, un investissement absurde suivi d'huissier puis de surendettement, un succès qui attire les profiteurs. Cinq scènes collectives pour quatre joueurs s'y ajoutent (célébrité, secret, héritage, rival amoureux, scandale).
+
+## Réglages utiles
+
+Tous les réglages de partie se font dans le salon, par l'hôte, avec une explication sous chaque option. Pour les tests, la variable d'environnement RICHISSIME_TIME_SCALE accélère les chronos.
+
+## Nouveautés de la version 4
+
+Un bouton Destins aléatoires dans le salon tire au sort, pour chaque joueur, la famille de naissance, la dangerosité de la vie, le niveau de loufoquerie et le don de naissance. Chaque critère a aussi sa propre option Au hasard par joueur.
+
+La fin de partie se fait par vote par défaut. Quand tout le monde est mort, chaque vie défile une par une avec sa fiche (moments clés, fortune au sommet et au plus bas, argent gagné et dépensé, parcours, états finaux). Les joueurs notent chaque vie de 1 à 10 dans un temps réglable, et la meilleure moyenne gagne. Les réglages permettent de revenir à la fin à la fortune, de changer le temps de vote et d'autoriser ou non à se noter soi-même.
